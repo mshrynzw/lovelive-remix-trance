@@ -3,6 +3,10 @@
 import * as React from "react";
 import { tracks, type Track } from "@/lib/tracks";
 
+const VOLUME_STORAGE_KEY = "ll-trance-volume";
+const MUTED_STORAGE_KEY = "ll-trance-muted";
+const DEFAULT_VOLUME = 0.7;
+
 type PlayerContextValue = {
   currentTrack: Track | null;
   isPlaying: boolean;
@@ -11,11 +15,16 @@ type PlayerContextValue = {
   /** true once the browser reports it can play the current source */
   isReady: boolean;
   hasError: boolean;
+  /** 0–1 linear gain applied to the HTMLAudioElement */
+  volume: number;
+  isMuted: boolean;
   playTrack: (track: Track) => void;
   togglePlay: () => void;
   seek: (time: number) => void;
   playNext: () => void;
   playPrev: () => void;
+  setVolume: (volume: number) => void;
+  toggleMute: () => void;
 };
 
 const PlayerContext = React.createContext<PlayerContextValue | null>(null);
@@ -28,18 +37,28 @@ export function usePlayer() {
   return ctx;
 }
 
+function clampVolume(value: number) {
+  if (!Number.isFinite(value)) return DEFAULT_VOLUME;
+  return Math.min(1, Math.max(0, value));
+}
+
 export function PlayerProvider({ children }: { children: React.ReactNode }) {
   const audioRef = React.useRef<HTMLAudioElement | null>(null);
+  const lastVolumeRef = React.useRef(DEFAULT_VOLUME);
   const [currentTrack, setCurrentTrack] = React.useState<Track | null>(null);
   const [isPlaying, setIsPlaying] = React.useState(false);
   const [currentTime, setCurrentTime] = React.useState(0);
   const [duration, setDuration] = React.useState(0);
   const [isReady, setIsReady] = React.useState(false);
   const [hasError, setHasError] = React.useState(false);
+  const [volume, setVolumeState] = React.useState(DEFAULT_VOLUME);
+  const [isMuted, setIsMuted] = React.useState(false);
+  const [storageReady, setStorageReady] = React.useState(false);
 
   React.useEffect(() => {
     const audio = new Audio();
     audio.preload = "metadata";
+    audio.volume = DEFAULT_VOLUME;
     audioRef.current = audio;
 
     const onTimeUpdate = () => setCurrentTime(audio.currentTime);
@@ -76,6 +95,67 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
       audio.removeEventListener("pause", onPause);
       audio.pause();
     };
+  }, []);
+
+  React.useEffect(() => {
+    try {
+      const storedVolume = localStorage.getItem(VOLUME_STORAGE_KEY);
+      const storedMuted = localStorage.getItem(MUTED_STORAGE_KEY);
+      if (storedVolume != null) {
+        const next = clampVolume(Number(storedVolume));
+        setVolumeState(next);
+        if (next > 0) lastVolumeRef.current = next;
+      }
+      if (storedMuted === "1") setIsMuted(true);
+    } catch {
+      // ignore quota / private-mode failures
+    } finally {
+      setStorageReady(true);
+    }
+  }, []);
+
+  React.useEffect(() => {
+    if (!storageReady) return;
+    try {
+      localStorage.setItem(VOLUME_STORAGE_KEY, String(volume));
+      localStorage.setItem(MUTED_STORAGE_KEY, isMuted ? "1" : "0");
+    } catch {
+      // ignore quota / private-mode failures
+    }
+  }, [volume, isMuted, storageReady]);
+
+  React.useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+    audio.volume = isMuted ? 0 : volume;
+  }, [volume, isMuted]);
+
+  const setVolume = React.useCallback((next: number) => {
+    const clamped = clampVolume(next);
+    setVolumeState(clamped);
+    if (clamped > 0) {
+      lastVolumeRef.current = clamped;
+      setIsMuted(false);
+    } else {
+      setIsMuted(true);
+    }
+  }, []);
+
+  const toggleMute = React.useCallback(() => {
+    setIsMuted((muted) => {
+      if (muted) {
+        setVolumeState((current) => {
+          if (current > 0) return current;
+          return lastVolumeRef.current || DEFAULT_VOLUME;
+        });
+        return false;
+      }
+      setVolumeState((current) => {
+        if (current > 0) lastVolumeRef.current = current;
+        return current;
+      });
+      return true;
+    });
   }, []);
 
   const loadAndPlay = React.useCallback((track: Track) => {
@@ -163,11 +243,15 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
     duration,
     isReady,
     hasError,
+    volume,
+    isMuted,
     playTrack,
     togglePlay,
     seek,
     playNext,
     playPrev,
+    setVolume,
+    toggleMute,
   };
 
   return (

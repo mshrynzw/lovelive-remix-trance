@@ -3,9 +3,91 @@
 import * as React from "react";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
-import { Pause, Play, SkipBack, SkipForward, AlertCircle } from "lucide-react";
+import {
+  Pause,
+  Play,
+  SkipBack,
+  SkipForward,
+  AlertCircle,
+  Volume2,
+  Volume1,
+  VolumeX,
+} from "lucide-react";
 import { usePlayer } from "@/components/providers/player-provider";
 import { formatTime } from "@/lib/utils";
+
+function canHoverFinePointer() {
+  if (typeof window === "undefined") return true;
+  return window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+}
+
+function VolumeControl() {
+  const { volume, isMuted, setVolume, toggleMute } = usePlayer();
+  const [pinned, setPinned] = React.useState(false);
+  const wrapRef = React.useRef<HTMLDivElement>(null);
+
+  const displayVolume = isMuted ? 0 : volume;
+  const percent = Math.round(displayVolume * 100);
+
+  React.useEffect(() => {
+    if (!pinned) return;
+    const onPointerDown = (event: PointerEvent) => {
+      if (!wrapRef.current?.contains(event.target as Node)) {
+        setPinned(false);
+      }
+    };
+    document.addEventListener("pointerdown", onPointerDown);
+    return () => document.removeEventListener("pointerdown", onPointerDown);
+  }, [pinned]);
+
+  const onIconClick = () => {
+    if (!canHoverFinePointer() && !pinned) {
+      setPinned(true);
+      return;
+    }
+    toggleMute();
+  };
+
+  const VolumeIcon =
+    percent === 0 ? VolumeX : percent < 50 ? Volume1 : Volume2;
+
+  return (
+    <div
+      ref={wrapRef}
+      className={`player-volume group flex shrink-0 flex-row-reverse items-center gap-1.5 ${
+        pinned ? "is-pinned" : ""
+      }`}
+    >
+      <button
+        type="button"
+        onClick={onIconClick}
+        aria-label={percent === 0 ? "ミュート解除" : "ミュート"}
+        aria-pressed={percent === 0}
+        className="rounded-full p-1 text-ink-soft transition-colors hover:text-aurora-ice focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-aurora-mint"
+      >
+        <VolumeIcon className="h-4 w-4" />
+      </button>
+      <div className="player-volume-slider-wrap">
+        <input
+          type="range"
+          min={0}
+          max={100}
+          step={1}
+          value={percent}
+          onChange={(e) => setVolume(Number(e.target.value) / 100)}
+          aria-label="音量"
+          aria-valuemin={0}
+          aria-valuemax={100}
+          aria-valuenow={percent}
+          className="player-seek player-volume-slider h-1.5 cursor-pointer appearance-none rounded-full bg-white/10 accent-aurora-mint"
+          style={{
+            background: `linear-gradient(90deg, #4FFFB0 ${percent}%, rgba(255,255,255,0.12) ${percent}%)`,
+          }}
+        />
+      </div>
+    </div>
+  );
+}
 
 /**
  * Persistent, Spotify-like mini player docked to the bottom of the
@@ -61,7 +143,7 @@ export function MusicPlayer() {
             </div>
 
             <div className="flex flex-1 flex-col gap-2">
-              <div className="flex items-center justify-center gap-4 sm:justify-start">
+              <div className="relative flex items-center justify-center gap-4 pr-9 sm:justify-start sm:pr-0">
                 <button
                   onClick={playPrev}
                   aria-label="前の曲"
@@ -87,6 +169,10 @@ export function MusicPlayer() {
                 >
                   <SkipForward className="h-4 w-4" fill="currentColor" />
                 </button>
+
+                <div className="absolute right-0 sm:static sm:ml-auto">
+                  <VolumeControl />
+                </div>
               </div>
 
               <div className="flex items-center gap-2">
