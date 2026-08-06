@@ -1,0 +1,138 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-cinzel: "Cinzel", serif;
+  --font-cormorant: "Cormorant Garamond", serif;
+  --font-noto-jp: "Noto Sans JP", sans-serif;
+
+  color-scheme: dark;
+}
+
+* {
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background-color: #06182f;
+  color: #ffffff;
+  font-family: var(--font-noto-jp), var(--font-cormorant), sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+/* Custom scrollbar — thin, translucent, matches the aurora palette */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #06182f;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #00e5ff55, #4fffb055);
+  border-radius: 999px;
+}
+
+/* Visible, elegant focus ring for keyboard navigation (a11y) */
+:focus-visible {
+  outline: 2px solid #4fffb0;
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Selection color tuned to the aurora palette */
+::selection {
+  background: rgba(79, 255, 176, 0.35);
+  color: #ffffff;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.glass {
+  background: linear-gradient(
+    155deg,
+    rgba(216, 230, 248, 0.08),
+    rgba(216, 230, 248, 0.02)
+  );
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(166, 255, 255, 0.14);
+}
+
+.text-gradient-aurora {
+  background: linear-gradient(90deg, #a6ffff 0%, #00e5ff 45%, #4fffb0 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.section-divider {
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(166, 255, 255, 0.35),
+    transparent
+  );
+}
+
+/* Skip link for keyboard users */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 100;
+  padding: 0.75rem 1.5rem;
+  background: #0c274a;
+  color: #ffffff;
+  border-radius: 0 0 8px 0;
+}
+.skip-link:focus {
+  left: 0;
+}
+
+/* Range input (seek bar) thumb styling */
+.player-seek {
+  -webkit-appearance: none;
+  appearance: none;
+}
+.player-seek::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 0 8px rgba(79, 255, 176, 0.8);
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+.player-seek::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+.player-seek::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  border: none;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 0 8px rgba(79, 255, 176, 0.8);
+  cursor: pointer;
+}
