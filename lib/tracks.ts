@@ -26,18 +26,6 @@ export type Track = {
  */
 export const tracks: Track[] = [
   {
-    id: "track-00",
-    index: 0,
-    title: "TEST",
-    subtitle: "test",
-    bpm: 137,
-    key: "C# -> A",
-    duration: 452,
-    youtubeUrl: "https://www.youtube.com",
-    audioSrc: "/audio/260511_Dancing_stars_on_me_(Uplifting Trance 20260511 mix).m4a",
-    cover: "/images/Jacket_hp_Dancing_stars_on_me_(Uplifting Trance mix 20260511 mix).webp",
-  },
-  {
     id: "track-01",
     index: 1,
     title: "Dancing Stars on Me!",

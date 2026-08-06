@@ -5,9 +5,13 @@ import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ChevronDown, Play } from "lucide-react";
 import { usePlayer } from "@/components/providers/player-provider";
-import { tracks } from "@/lib/tracks";
+import type { Track } from "@/lib/tracks";
 
-export function Hero() {
+type HeroProps = {
+  featuredTrack: Track | null;
+};
+
+export function Hero({ featuredTrack }: HeroProps) {
   const sectionRef = React.useRef<HTMLElement | null>(null);
   const { playTrack } = usePlayer();
 
@@ -20,11 +24,15 @@ export function Hero() {
   const scale = useTransform(scrollYProgress, [0, 1], [1, 1.12]);
   const contentY = useTransform(scrollYProgress, [0, 1], [0, 80]);
 
+  const ariaLabel = featuredTrack
+    ? `LoveLive! Remix Trance — ${featuredTrack.title}`
+    : "LoveLive! Remix Trance";
+
   return (
     <section
       ref={sectionRef}
       id="hero"
-      aria-label="LoveLive! Remix Trance — WATER BLUE NEW WORLD"
+      aria-label={ariaLabel}
       className="relative flex h-[100svh] min-h-[640px] w-full items-center justify-center overflow-hidden"
     >
       <motion.div style={{ opacity, scale }} className="absolute inset-0">
@@ -72,11 +80,12 @@ export function Hero() {
 
         <motion.p
           initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1.4, delay: 1 }}
+          animate={{ opacity: featuredTrack ? 1 : 0 }}
+          transition={{ duration: 1.4, delay: featuredTrack ? 1 : 0 }}
           className="mt-8 max-w-md font-serif text-lg italic text-ink-soft/80 sm:text-xl"
+          aria-live="polite"
         >
-          WATER BLUE NEW WORLD
+          {featuredTrack?.title ?? "\u00A0"}
         </motion.p>
 
         <motion.div
@@ -86,11 +95,12 @@ export function Hero() {
           className="mt-12"
         >
           <button
+            type="button"
+            disabled={!featuredTrack}
             onClick={() => {
-              const first = tracks[0];
-              if (first) playTrack(first);
+              if (featuredTrack) playTrack(featuredTrack);
             }}
-            className="group inline-flex items-center gap-3 rounded-full bg-gradient-to-r from-aurora-cyan to-aurora-mint px-9 py-4 font-jp text-sm font-semibold tracking-widest text-night-deep shadow-glow transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:shadow-glow-mint hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-aurora-ice focus-visible:ring-offset-4 focus-visible:ring-offset-night-deep active:scale-95"
+            className="group inline-flex items-center gap-3 rounded-full bg-gradient-to-r from-aurora-cyan to-aurora-mint px-9 py-4 font-jp text-sm font-semibold tracking-widest text-night-deep shadow-glow transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:shadow-glow-mint hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-aurora-ice focus-visible:ring-offset-4 focus-visible:ring-offset-night-deep active:scale-95 disabled:pointer-events-none disabled:opacity-60"
           >
             <Play className="h-4 w-4" fill="currentColor" />
             Play Music

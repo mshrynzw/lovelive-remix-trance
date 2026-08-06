@@ -37,9 +37,9 @@ export function TrackCard({ track, index }: { track: Track; index: number }) {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-night-deep/80 via-night-deep/10 to-transparent" />
 
-        <span className="absolute left-4 top-4 font-display text-sm tracking-widest text-ink-light/80">
+        {/* <span className="absolute left-4 top-4 font-display text-sm tracking-widest text-ink-light/80">
           {String(track.index).padStart(2, "0")}
-        </span>
+        </span> */}
 
         <button
           onClick={() => playTrack(track)}

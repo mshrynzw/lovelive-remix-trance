@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
+import type { Track } from "@/lib/tracks";
 
 const paragraphs = [
   "ラブライブ！の名曲を、Uplifting Tranceへとリミックス。",
@@ -9,7 +10,11 @@ const paragraphs = [
   "夜空の彼方へ——6曲を通して、あなたを旅へ誘います。",
 ];
 
-export function About() {
+type AboutProps = {
+  featuredTrack: Track | null;
+};
+
+export function About({ featuredTrack }: AboutProps) {
   return (
     <section
       id="about"
@@ -73,15 +78,17 @@ export function About() {
           transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
           className="order-1 lg:order-2"
         >
-          <div className="relative mx-auto aspect-square w-full max-w-md overflow-hidden rounded-3xl shadow-card ring-1 ring-aurora-ice/15">
-            <Image
-              src="/images/jacket.webp"
-              alt="WATER BLUE NEW WORLD アルバムジャケット"
-              fill
-              sizes="(min-width: 1024px) 480px, 90vw"
-              loading="lazy"
-              className="object-cover"
-            />
+          <div className="relative mx-auto aspect-square w-full max-w-md overflow-hidden rounded-3xl shadow-card ring-1 ring-aurora-ice/15 bg-night-base/40">
+            {featuredTrack ? (
+              <Image
+                src={featuredTrack.cover}
+                alt={`${featuredTrack.title} ジャケット`}
+                fill
+                sizes="(min-width: 1024px) 480px, 90vw"
+                loading="lazy"
+                className="object-cover"
+              />
+            ) : null}
             <div className="absolute inset-0 bg-gradient-to-t from-night-deep/30 via-transparent to-transparent" />
           </div>
         </motion.div>
