@@ -7,6 +7,7 @@ import { Nav } from "@/components/nav";
 import { Footer } from "@/components/footer";
 import { MusicPlayer } from "@/components/music-player";
 import { PlayerProvider } from "@/components/providers/player-provider";
+import { siteUrl } from "@/lib/site";
 
 const cinzel = Cinzel({
   subsets: ["latin"],
@@ -30,7 +31,6 @@ const notoSansJP = Noto_Sans_JP({
   display: "swap",
 });
 
-const siteUrl = "https://water-blue-new-world.example.com";
 const title = "Love Live! Trance";
 const description =
   "ラブライブ！の名曲をUplifting Tranceへとリミックスした曲。オーロラのように広がるシンセと透き通るピアノで紡ぐ、夜空を旅するような音の世界。";
