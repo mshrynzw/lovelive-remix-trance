@@ -1,0 +1,28 @@
+---
+description: Phase 2 — move track audio from public/ to Cloudflare R2
+globs: lib/tracks.ts,public/audio/**,wrangler.jsonc,docs/phase2-r2.md,README.md
+alwaysApply: false
+---
+
+# Phase 2: 音源を Cloudflare R2 へ
+
+詳細手順・チェックリストは [`docs/phase2-r2.md`](docs/phase2-r2.md) を正本とする。
+
+## 方針
+
+- Phase 1: 音源は `public/audio/`（Workers の静的配信）。転送が増えるとコスト・制限に効く。
+- Phase 2: **m4a など音源だけ R2** に移す。サイト本体は Workers（OpenNext）のまま。
+- ジャケット画像は当面 `public/images/` でよい（必要なら後で R2）。
+
+## 実装時に守ること
+
+- `lib/tracks.ts` の各曲 `audioSrc` を R2 の**公開 URL**（またはカスタムドメイン）に変更する。
+- プレイヤー（`components/providers/player-provider.tsx`）は `<audio>` / `Audio` の `src` をそのまま使う想定。CORS が必要なら R2 / カスタムドメイン側で許可する。
+- 移行後、`public/audio/` の大きな音源はリポジトリ・デプロイ成果物から外す（残すならプレースホルダ説明のみ）。
+- OpenNext の incremental cache 用 R2（`NEXT_INC_CACHE_R2_BUCKET`）と**音源用バケットは分ける**のが望ましい。
+- `pnpm deploy` ではなく **`pnpm run deploy`**（pnpm 本体の `deploy` と衝突する）。
+
+## やってはいけないこと
+
+- 大きな音源を Worker バンドルに同梱しない。
+- Phase 2 未実施のまま「帯域が足りないから別ホストへ全面移行」を先に提案しない。まず R2 移行を検討する。
