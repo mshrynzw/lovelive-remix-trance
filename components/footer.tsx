@@ -11,7 +11,7 @@ function TiktokIcon(props: React.SVGProps<SVGSVGElement>) {
 }
 
 const socials = [
-  { label: "YouTube", href: "https://www.youtube.com/@Snowdome_World", Icon: Youtube },
+  { label: "YouTube", href: "https://www.youtube.com/playlist?list=PLNODum9w1rr8", Icon: Youtube },
   { label: "TikTok", href: "https://www.tiktok.com/@kaoru_yuki_sdw", Icon: TiktokIcon },
 ];
 
