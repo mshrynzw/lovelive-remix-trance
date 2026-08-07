@@ -12,19 +12,19 @@ import { Lightbox, type GalleryImage } from "@/components/lightbox";
  */
 const jackets: GalleryImage[] = [
   {
-    src: "/images/jacket.webp",
+    src: "/images/Jacket_hp_next_CHASE!_(Uplifting Trance mix 20260911 mix).webp",
     alt: "発表予定曲 1 のジャケット",
   },
   {
-    src: "/images/jacket.webp",
+    src: "/images/Jacket_hp_next_UNIVERSE!!_(Uplifting Trance mix 2026MMDD mix).webp",
     alt: "発表予定曲 2 のジャケット",
   },
   {
-    src: "/images/jacket.webp",
+    src: "/images/Jacket_hp_next_Snow halation_(Uplifting Trance mix 2026MMDD mix).webp",
     alt: "発表予定曲 3 のジャケット",
   },
   {
-    src: "/images/jacket.webp",
+    src: "/images/Jacket_hp_next_Omoi yo Hitotsu ni Nare_(Uplifting Trance mix 2026MMDD mix).webp",
     alt: "発表予定曲 4 のジャケット",
   },
 ];
