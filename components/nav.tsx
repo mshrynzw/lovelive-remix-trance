@@ -1,12 +1,13 @@
 "use client";
 
 import * as React from "react";
+import Link from "next/link";
 import { motion, useScroll, useTransform } from "framer-motion";
 
 const links = [
-  { href: "#about", label: "About" },
-  { href: "#tracks", label: "Tracks" },
-  { href: "#next", label: "Next" },
+  { href: "/#about", label: "About" },
+  { href: "/#tracks", label: "Tracks" },
+  { href: "/#next", label: "Next" },
 ];
 
 export function Nav() {
@@ -23,12 +24,12 @@ export function Nav() {
       className="fixed inset-x-0 top-0 z-40 backdrop-blur-md transition-shadow"
     >
       <div className="container flex h-20 items-center justify-between">
-        <a
-          href="#hero"
+        <Link
+          href="/"
           className="font-display text-sm tracking-widest2 text-ink-light/90 transition-colors hover:text-aurora-ice"
         >
           Love Live! Trance
-        </a>
+        </Link>
         <nav aria-label="メインナビゲーション" className="hidden gap-8 sm:flex">
           {links.map((link) => (
             <a

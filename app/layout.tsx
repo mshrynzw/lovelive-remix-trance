@@ -7,7 +7,7 @@ import { Nav } from "@/components/nav";
 import { Footer } from "@/components/footer";
 import { MusicPlayer } from "@/components/music-player";
 import { PlayerProvider } from "@/components/providers/player-provider";
-import { siteUrl } from "@/lib/site";
+import { siteDescription, siteName, siteUrl } from "@/lib/site";
 
 const cinzel = Cinzel({
   subsets: ["latin"],
@@ -31,48 +31,47 @@ const notoSansJP = Noto_Sans_JP({
   display: "swap",
 });
 
-const title = "Love Live! Trance";
-const description =
-  "ラブライブ！の名曲をUplifting Tranceへとリミックスした曲。オーロラのように広がるシンセと透き通るピアノで紡ぐ、夜空を旅するような音の世界。";
-
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: title,
-    template: "%s | Love Live! Trance",
+    default: `${siteName} | ラブライブ！Uplifting Trance Remix`,
+    template: `%s | ${siteName}`,
   },
-  description,
+  description: siteDescription,
   keywords: [
-    "LoveLive!",
-    "Remix",
+    "ラブライブ",
+    "Love Live",
     "Uplifting Trance",
     "Trance",
-    "ラブライブ",
     "リミックス",
+    "Remix",
     "アニソン",
-    "Anison"
+    "Anison",
+    "Kaoru Yuki",
+    "Snowdome World",
   ],
   authors: [{ name: "LoveLive! Trance Project" }],
+  creator: "Kaoru Yuki (Snowdome World)",
   openGraph: {
     type: "music.album",
-    title,
-    description,
+    title: `${siteName} | ラブライブ！Uplifting Trance Remix`,
+    description: siteDescription,
     url: siteUrl,
-    siteName: "Love Live! Trance",
+    siteName,
     locale: "ja_JP",
     images: [
       {
         url: "/images/hero.webp",
         width: 2500,
         height: 2500,
-        alt: "Love Live! Trance",
+        alt: "Love Live! Trance — ラブライブ！Uplifting Trance Remix",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title,
-    description,
+    title: `${siteName} | ラブライブ！Uplifting Trance Remix`,
+    description: siteDescription,
     images: ["/images/hero.webp"],
   },
   icons: {
@@ -81,6 +80,12 @@ export const metadata: Metadata = {
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
   },
 };
 

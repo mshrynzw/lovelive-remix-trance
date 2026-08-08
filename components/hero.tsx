@@ -25,8 +25,8 @@ export function Hero({ featuredTrack }: HeroProps) {
   const contentY = useTransform(scrollYProgress, [0, 1], [0, 80]);
 
   const ariaLabel = featuredTrack
-    ? `LoveLive! Remix Trance — ${featuredTrack.title}`
-    : "LoveLive! Remix Trance";
+    ? `Love Live! Trance — ${featuredTrack.title}`
+    : "Love Live! Trance — ラブライブ！Uplifting Trance Remix";
 
   return (
     <section
@@ -38,7 +38,7 @@ export function Hero({ featuredTrack }: HeroProps) {
       <motion.div style={{ opacity, scale }} className="absolute inset-0">
         <Image
           src="/images/hero.webp"
-          alt="Love Live! Remix Trance"
+          alt="Love Live! Trance — ラブライブ！Uplifting Trance Remix"
           fill
           priority
           sizes="100vw"
@@ -67,16 +67,20 @@ export function Hero({ featuredTrack }: HeroProps) {
           transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1], delay: 0.4 }}
           className="font-display text-4xl leading-tight tracking-widest text-ink-light drop-shadow-[0_0_30px_rgba(0,229,255,0.25)] sm:text-6xl md:text-7xl"
         >
-          Love Live!
+          <span className="block">Love Live!</span>
+          <motion.span
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1], delay: 0.6 }}
+            className="text-gradient-aurora mt-2 block text-3xl tracking-[0.3em] sm:text-5xl md:text-6xl"
+          >
+            Trance
+          </motion.span>
+          <span className="sr-only">
+            {" "}
+            — ラブライブ！Uplifting Trance Remix
+          </span>
         </motion.h1>
-        <motion.h2
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1], delay: 0.6 }}
-          className="text-gradient-aurora mt-2 font-display text-3xl tracking-[0.3em] sm:text-5xl md:text-6xl"
-        >
-          Trance
-        </motion.h2>
 
         <motion.p
           initial={{ opacity: 0 }}
