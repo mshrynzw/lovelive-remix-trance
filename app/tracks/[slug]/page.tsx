@@ -8,6 +8,7 @@ import {
   getTrackBySlug,
   trackPath,
   trackSearchLabel,
+  trackSeriesPhrase,
   tracks,
 } from "@/lib/tracks";
 
@@ -28,7 +29,7 @@ export async function generateMetadata({
 
   const label = trackSearchLabel(track);
   const title = `${label} Uplifting Trance Remix`;
-  const description = `ラブライブ！「${label}」の Uplifting Trance リミックス by ${siteArtist}。BPM ${track.bpm} / ${track.subtitle}。試聴・YouTube はこちら。`;
+  const description = `${trackSeriesPhrase(track, label)}の Uplifting Trance リミックス by ${siteArtist}。BPM ${track.bpm} / ${track.subtitle}。試聴・YouTube はこちら。`;
   const url = `${siteUrl}${trackPath(track)}`;
 
   return {

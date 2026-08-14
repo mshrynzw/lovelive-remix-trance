@@ -1,8 +1,24 @@
+export type LoveLiveSeries =
+  | "muse"
+  | "sunshine"
+  | "nijigasaki"
+  | "superstar"
+  | "hasunosora";
+
+export const seriesLabel: Record<LoveLiveSeries, string> = {
+  muse: "ラブライブ！",
+  sunshine: "ラブライブ！サンシャイン!!",
+  nijigasaki: "ラブライブ！虹ヶ咲学園スクールアイドル同好会",
+  superstar: "ラブライブ！スーパースター!!",
+  hasunosora: "ラブライブ！蓮ノ空女学院スクールアイドルクラブ",
+};
+
 export type Track = {
   id: string;
   /** URL segment under /tracks/[slug] */
   slug: string;
   index: number;
+  series: LoveLiveSeries;
   /** Display / primary title (prefer Japanese when that is how fans search) */
   title: string;
   /** English or romanized form when different from title — used in metadata */
@@ -28,6 +44,7 @@ export const tracks: Track[] = [
     id: "track-01",
     slug: "dancing-stars-on-me",
     index: 1,
+    series: "muse",
     title: "Dancing stars on me!",
     subtitle: "(Uplifting Trance 20260511 mix)",
     bpm: 137,
@@ -42,6 +59,7 @@ export const tracks: Track[] = [
     id: "track-02",
     slug: "mirai-no-bokura-wa-shitteru-yo",
     index: 2,
+    series: "sunshine",
     title: "未来の僕らは知ってるよ",
     titleEn: "Mirai no Bokura wa Shitteru yo",
     subtitle: "(Uplifting Trance 20260603 mix)",
@@ -57,6 +75,7 @@ export const tracks: Track[] = [
     id: "track-03",
     slug: "nijiiro-passions",
     index: 3,
+    series: "nijigasaki",
     title: "虹色Passions!",
     titleEn: "Nijiiro Passions!",
     subtitle: "(Uplifting Trance 20260620 mix)",
@@ -72,6 +91,7 @@ export const tracks: Track[] = [
     id: "track-04",
     slug: "start-true-dreams",
     index: 4,
+    series: "superstar",
     title: "START!! True dreams",
     subtitle: "(Uplifting Trance 20260706 mix)",
     bpm: 138,
@@ -86,6 +106,7 @@ export const tracks: Track[] = [
     id: "track-05",
     slug: "yume-no-tobira",
     index: 5,
+    series: "muse",
     title: "ユメノトビラ",
     titleEn: "Yume no Tobira",
     subtitle: "(Uplifting Trance 260716 mix)",
@@ -101,6 +122,7 @@ export const tracks: Track[] = [
     id: "track-06",
     slug: "water-blue-new-world",
     index: 6,
+    series: "sunshine",
     title: "WATER BLUE NEW WORLD",
     subtitle: "(Uplifting Trance 20260726 mix)",
     bpm: 138,
@@ -124,4 +146,9 @@ export function trackPath(track: Track): string {
 /** Title line for meta descriptions — includes EN when present. */
 export function trackSearchLabel(track: Track): string {
   return track.titleEn ? `${track.title}（${track.titleEn}）` : track.title;
+}
+
+/** e.g. ラブライブ！サンシャイン!!「未来の僕らは知ってるよ」 */
+export function trackSeriesPhrase(track: Track, quotedTitle = track.title): string {
+  return `アニメ「${seriesLabel[track.series]}」の「${quotedTitle}」`;
 }

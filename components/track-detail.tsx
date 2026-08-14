@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import { ArrowLeft, Pause, Play, Youtube } from "lucide-react";
 import { usePlayer } from "@/components/providers/player-provider";
 import { formatTime } from "@/lib/utils";
-import { trackPath, type Track } from "@/lib/tracks";
+import { trackPath, trackSeriesPhrase, type Track } from "@/lib/tracks";
 
 type TrackDetailProps = {
   track: Track;
@@ -69,7 +69,7 @@ export function TrackDetail({ track, prev, next }: TrackDetailProps) {
             </div>
 
             <p className="max-w-xl font-jp text-base leading-loose text-ink-soft/85">
-              ラブライブ！「{track.title}」の Uplifting Trance
+              {trackSeriesPhrase(track)}の Uplifting Trance
               リミックス。Kaoru Yuki (Snowdome World)
               によるアレンジを、このページから試聴できます。
             </p>
