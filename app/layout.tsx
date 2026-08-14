@@ -112,8 +112,10 @@ export default function RootLayout({
         <PlayerProvider>
           <Nav />
           <main id="main">{children}</main>
-          <Footer />
-          <MusicPlayer />
+          <div className="has-[[data-music-player]]:pb-48 sm:has-[[data-music-player]]:pb-36">
+            <Footer />
+            <MusicPlayer />
+          </div>
         </PlayerProvider>
       </body>
     </html>

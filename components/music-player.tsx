@@ -118,6 +118,7 @@ export function MusicPlayer() {
           exit={{ y: 96, opacity: 0 }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           className="fixed inset-x-0 bottom-0 z-50 px-3 pb-3 sm:px-6 sm:pb-6"
+          data-music-player
           role="region"
           aria-label="ミュージックプレイヤー"
         >
