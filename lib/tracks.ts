@@ -69,7 +69,7 @@ export const tracks: Track[] = [
     youtubeUrl: "https://www.youtube.com/watch?v=KvYeikMzMj8",
     releasedAt: "2026-06-03",
     audioSrc: "/audio/260603_未来の僕らは知ってるよ_(Uplifting Trance 20260603 mix).m4a",
-    cover: "/images/Jacket_hp未来の僕らは知ってるよ_(Uplifting Trance 20260603 mix).webp",
+    cover: "/images/Jacket_hp_未来の僕らは知ってるよ_(Uplifting Trance 20260603 mix).webp",
   },
   {
     id: "track-03",
@@ -132,6 +132,22 @@ export const tracks: Track[] = [
     releasedAt: "2026-07-26",
     audioSrc: "/audio/260726_WATER BLUE NEW WORLD_(Uplifting Trance 20260726 mix).m4a",
     cover: "/images/Jacket_hp_WATER BLUE NEW WORLD_(Uplifting Trance 20260726 mix).webp",
+  },
+  {
+    id: "track-07",
+    slug: "nijiiro-chase",
+    index: 7,
+    series: "nijigasaki",
+    title: "CHASE!",
+    titleEn: "CHASE!",
+    subtitle: "(Uplifting Trance 20260918 mix)",
+    bpm: 138,
+    key: "C# -> Bb",
+    duration: 502,
+    youtubeUrl: "https://www.youtube.com/watch?v=Wdb-33v8LEE",
+    releasedAt: "2026-09-18",
+    audioSrc: "/audio/260823_CHASE!_(Uplifting Trance 20260918 mix).m4a",
+    cover: "/images/Jacket_hp_CHASE!_(Uplifting Trance 20260918 mix).webp",
   },
 ];
 
