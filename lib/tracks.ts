@@ -149,6 +149,22 @@ export const tracks: Track[] = [
     audioSrc: "/audio/260823_CHASE!_(Uplifting Trance 20260918 mix).m4a",
     cover: "/images/Jacket_hp_CHASE!_(Uplifting Trance 20260918 mix).webp",
   },
+  {
+    id: "track-08",
+    slug: "universe",
+    index: 8,
+    series: "superstar",
+    title: "UNIVERSE!!",
+    titleEn: "UNIVERSE!!",
+    subtitle: "(Uplifting Trance 20261030 mix)",
+    bpm: 140,
+    key: "B",
+    duration: 440,
+    youtubeUrl: "https://www.youtube.com/watch?v=oybgCyAcJAM",
+    releasedAt: "2026-10-30",
+    audioSrc: "/audio/261002_UNIVERSE!!_(Uplifting Trance 20261030 mix).m4a",
+    cover: "/images/Jacket_hp_UNIVERSE!!_(Uplifting Trance 20261030 mix).webp",
+  },
 ];
 
 export function getTrackBySlug(slug: string): Track | undefined {
