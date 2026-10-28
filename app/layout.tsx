@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
+import Script from "next/script";
 import { Cinzel, Cormorant_Garamond, Noto_Sans_JP } from "next/font/google";
 import "./globals.css";
 import { AuroraBackground } from "@/components/aurora-background";
@@ -105,6 +106,26 @@ export default function RootLayout({
       className={`${cinzel.variable} ${cormorant.variable} ${notoSansJP.variable}`}
     >
       <body>
+        {process.env.NODE_ENV === "development" ? (
+          <Script id="clear-dev-service-worker" strategy="beforeInteractive">
+            {`(function () {
+  if (!("serviceWorker" in navigator)) return;
+  navigator.serviceWorker.getRegistrations().then(function (registrations) {
+    if (!registrations.length) return;
+    var clearCaches = window.caches
+      ? caches.keys().then(function (keys) {
+          return Promise.all(keys.map(function (key) { return caches.delete(key); }));
+        })
+      : Promise.resolve();
+    Promise.all(
+      registrations
+        .map(function (registration) { return registration.unregister(); })
+        .concat([clearCaches])
+    ).then(function () { location.reload(); });
+  });
+})();`}
+          </Script>
+        ) : null}
         <a href="#main" className="skip-link">
           メインコンテンツへスキップ
         </a>

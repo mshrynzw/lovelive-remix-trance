@@ -7,9 +7,6 @@ const nextConfig = {
   images: {
     formats: ["image/webp"],
   },
-  experimental: {
-    optimizePackageImports: ["lucide-react", "framer-motion"],
-  },
 };
 
 export default nextConfig;

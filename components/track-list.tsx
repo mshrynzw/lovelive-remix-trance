@@ -1,8 +1,30 @@
+"use client";
+
+import * as React from "react";
 import { SectionHeading } from "@/components/section-heading";
 import { TrackCard } from "@/components/track-card";
-import { tracks } from "@/lib/tracks";
+import { tracks, type Track } from "@/lib/tracks";
+
+function shuffleTracks(list: readonly Track[]): Track[] {
+  const next = [...list];
+  for (let i = next.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    const current = next[i];
+    const swap = next[j];
+    if (current === undefined || swap === undefined) continue;
+    next[i] = swap;
+    next[j] = current;
+  }
+  return next;
+}
 
 export function TrackList() {
+  const [ordered, setOrdered] = React.useState<Track[] | null>(null);
+
+  React.useEffect(() => {
+    setOrdered(shuffleTracks(tracks));
+  }, []);
+
   return (
     <section
       id="tracks"
@@ -17,7 +39,7 @@ export function TrackList() {
         />
 
         <div className="mt-16 grid w-full grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {tracks.map((track, i) => (
+          {ordered?.map((track, i) => (
             <TrackCard key={track.id} track={track} index={i} />
           ))}
         </div>
