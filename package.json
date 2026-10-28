@@ -2,6 +2,10 @@
   "name": "water-blue-new-world",
   "private": true,
   "version": "1.0.0",
+  "packageManager": "pnpm@9.10.0",
+  "engines": {
+    "pnpm": "^9.0.0"
+  },
   "description": "LoveLive! Remix Album — Uplifting Trance | WATER BLUE NEW WORLD",
   "scripts": {
     "dev": "next dev",
