@@ -2,12 +2,12 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import type { Track } from "@/lib/tracks";
+import { tracks, type Track } from "@/lib/tracks";
 
 const paragraphs = [
   "ラブライブ！の名曲を、Uplifting Tranceへとリミックス。",
   "オーロラのように広がるシンセ、透き通るピアノ、力強いキックで、新しい世界を描きました。",
-  "夜空の彼方へ——6曲を通して、あなたを旅へ誘います。",
+  `夜空の彼方へ——${tracks.length}曲を通して、あなたを旅へ誘います。`,
 ];
 
 type AboutProps = {

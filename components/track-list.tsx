@@ -3,7 +3,7 @@
 import * as React from "react";
 import { SectionHeading } from "@/components/section-heading";
 import { TrackCard } from "@/components/track-card";
-import { tracks, type Track } from "@/lib/tracks";
+import { seriesLabel, trackPath, tracks, type Track } from "@/lib/tracks";
 
 function shuffleTracks(list: readonly Track[]): Track[] {
   const next = [...list];
@@ -43,6 +43,16 @@ export function TrackList() {
             <TrackCard key={track.id} track={track} index={i} />
           ))}
         </div>
+        <noscript>
+          <ul>
+            {tracks.map((track) => (
+              <li key={track.id}>
+                <a href={trackPath(track)}>{track.title}</a>
+                {` — ${seriesLabel[track.series]} / BPM ${track.bpm}`}
+              </li>
+            ))}
+          </ul>
+        </noscript>
       </div>
     </section>
   );

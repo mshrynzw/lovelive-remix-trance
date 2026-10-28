@@ -1,5 +1,6 @@
 import * as React from "react";
 import { Youtube } from "lucide-react";
+import { tiktokUrl, unofficialNotice, youtubePlaylistUrl } from "@/lib/site";
 
 /** Simple TikTok glyph — lucide-react has no official TikTok icon. */
 function TiktokIcon(props: React.SVGProps<SVGSVGElement>) {
@@ -11,8 +12,8 @@ function TiktokIcon(props: React.SVGProps<SVGSVGElement>) {
 }
 
 const socials = [
-  { label: "YouTube", href: "https://www.youtube.com/playlist?list=PLGTHA_agRTUU", Icon: Youtube },
-  { label: "TikTok", href: "https://www.tiktok.com/@kaoru_yuki_sdw", Icon: TiktokIcon },
+  { label: "YouTube", href: youtubePlaylistUrl, Icon: Youtube },
+  { label: "TikTok", href: tiktokUrl, Icon: TiktokIcon },
 ];
 
 export function Footer() {
@@ -46,7 +47,7 @@ export function Footer() {
           &copy; {year} Love Live! Trance Project. All rights reserved.
         </p>
         <p className="max-w-md font-jp text-[11px] leading-relaxed text-ink-soft/35">
-          本サイトは非公式のファン制作リミックス作品を紹介するものです。「ラブライブ！」および関連の商標・著作権は各権利者に帰属します。
+          {unofficialNotice}
         </p>
       </div>
     </footer>

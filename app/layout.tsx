@@ -8,7 +8,13 @@ import { Nav } from "@/components/nav";
 import { Footer } from "@/components/footer";
 import { MusicPlayer } from "@/components/music-player";
 import { PlayerProvider } from "@/components/providers/player-provider";
-import { siteDescription, siteName, siteUrl } from "@/lib/site";
+import {
+  llmsTxtPath,
+  siteDescription,
+  siteName,
+  siteUrl,
+  tdmPolicyPath,
+} from "@/lib/site";
 
 const cinzel = Cinzel({
   subsets: ["latin"],
@@ -78,15 +84,28 @@ export const metadata: Metadata = {
   icons: {
     icon: "/favicon.svg",
   },
+  alternates: {
+    types: {
+      "text/plain": llmsTxtPath,
+    },
+  },
   robots: {
     index: true,
     follow: true,
+    "max-image-preview": "large",
+    "max-snippet": -1,
+    "max-video-preview": -1,
     googleBot: {
       index: true,
       follow: true,
       "max-image-preview": "large",
       "max-snippet": -1,
+      "max-video-preview": -1,
     },
+  },
+  other: {
+    "tdm-reservation": "0",
+    "tdm-policy": `${siteUrl}${tdmPolicyPath}`,
   },
 };
 

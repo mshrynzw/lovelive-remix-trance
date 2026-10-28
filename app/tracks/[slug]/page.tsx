@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { JsonLd } from "@/components/json-ld";
 import { TrackDetail } from "@/components/track-detail";
-import { trackPageJsonLd } from "@/lib/json-ld";
-import { siteArtist, siteName, siteUrl } from "@/lib/site";
+import { breadcrumbJsonLd, trackFaqJsonLd, trackPageJsonLd } from "@/lib/json-ld";
+import { llmsTxtPath, siteArtist, siteName, siteUrl } from "@/lib/site";
 import {
   getTrackBySlug,
   trackPath,
@@ -37,6 +37,9 @@ export async function generateMetadata({
     description,
     alternates: {
       canonical: trackPath(track),
+      types: {
+        "text/plain": llmsTxtPath,
+      },
     },
     openGraph: {
       type: "music.song",
@@ -75,6 +78,8 @@ export default async function TrackPage({ params }: PageProps) {
   return (
     <>
       <JsonLd data={trackPageJsonLd(track)} />
+      <JsonLd data={breadcrumbJsonLd(track)} />
+      <JsonLd data={trackFaqJsonLd(track)} />
       <TrackDetail track={track} prev={prev} next={next} />
     </>
   );
