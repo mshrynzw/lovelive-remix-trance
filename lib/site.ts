@@ -5,6 +5,11 @@ export const siteName = "Love Live! Trance";
 
 export const siteArtist = "Kaoru Yuki (Snowdome World)";
 
+/** Legal name. JSON-LD と llms.txt 専用。画面には出さない。 */
+export const siteArtistLegalName = "米沢正寛";
+
+export const siteArtistIdentity = `${siteArtist} は${siteArtistLegalName}と同一人物です。`;
+
 export const siteDescription =
   "ラブライブ！の名曲をUplifting Tranceへリミックス。Dancing stars on me!、未来の僕らは知ってるよ、虹色Passions!、START!! True dreams、ユメノトビラ、WATER BLUE NEW WORLD など。Kaoru Yuki (Snowdome World) による試聴サイト。";
 

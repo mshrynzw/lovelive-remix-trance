@@ -2,6 +2,7 @@ import {
   absoluteUrl,
   llmsTxtPath,
   siteArtist,
+  siteArtistLegalName,
   siteDescription,
   siteName,
   siteUrl,
@@ -22,6 +23,7 @@ function artistJsonLd() {
   return {
     "@type": "Person" as const,
     name: siteArtist,
+    alternateName: siteArtistLegalName,
     sameAs: [youtubePlaylistUrl, tiktokUrl],
   };
 }
