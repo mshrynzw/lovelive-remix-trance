@@ -111,7 +111,7 @@ export function TrackCard({ track, index }: { track: Track; index: number }) {
           href={track.youtubeUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-2 inline-flex items-center justify-center gap-2 rounded-full border border-aurora-ice/25 px-4 py-2.5 font-jp text-xs tracking-wide text-ink-soft transition-all duration-300 hover:border-aurora-ice/60 hover:bg-aurora-ice/5 hover:text-aurora-ice focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-aurora-mint"
+          className="mt-auto inline-flex items-center justify-center gap-2 rounded-full border border-aurora-ice/25 px-4 py-2.5 font-jp text-xs tracking-wide text-ink-soft transition-all duration-300 hover:border-aurora-ice/60 hover:bg-aurora-ice/5 hover:text-aurora-ice focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-aurora-mint"
         >
           <Youtube className="h-4 w-4" />
           Watch on YouTube
