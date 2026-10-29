@@ -165,6 +165,22 @@ export const tracks: Track[] = [
     audioSrc: "/audio/261002_UNIVERSE!!_(Uplifting Trance 20261030 mix).m4a",
     cover: "/images/Jacket_hp_UNIVERSE!!_(Uplifting Trance 20261030 mix).webp",
   },
+  {
+    id: "track-09",
+    slug: "snow-halation",
+    index: 9,
+    series: "muse",
+    title: "Snow halation",
+    titleEn: "Snow halation",
+    subtitle: "(Uplifting Trance 20261130 mix)",
+    bpm: 140,
+    key: "A",
+    duration: 497,
+    youtubeUrl: "https://www.youtube.com/watch?v=j_nAXwPk9R0",
+    releasedAt: "2026-11-30",
+    audioSrc: "/audio/261018_Snow halation_(Uplifting Trance 20261130 mix).m4a",
+    cover: "/images/Jacket_hp_Snow halation_(Uplifting Trance 20261130 mix).webp",
+  },
 ];
 
 export function getTrackBySlug(slug: string): Track | undefined {
