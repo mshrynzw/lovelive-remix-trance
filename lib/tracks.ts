@@ -178,6 +178,22 @@ export const tracks: Track[] = [
     audioSrc: "/audio/261018_Snow halation_(Uplifting Trance 20261031 mix).m4a",
     cover: "/images/Jacket_hp_Snow halation_(Uplifting Trance 20261031 mix).webp",
   },
+  {
+    id: "track-10",
+    slug: "omoi-yo-hitotsu-ni-nare",
+    index: 10,
+    series: "sunshine",
+    title: "想いよひとつになれ",
+    titleEn: "Omoi yo hitotsu ni nare",
+    subtitle: "(Uplifting Trance 20261130 mix)",
+    bpm: 138,
+    key: "G",
+    duration: 464,
+    youtubeUrl: "https://www.youtube.com/watch?v=Z_k1EWEpagc",
+    releasedAt: "2026-11-30",
+    audioSrc: "/audio/261102_想いよひとつになれ_(Uplifting Trance 20261130 mix).m4a",
+    cover: "/images/Jacket_hp_Omoi yo Hitotsu ni Nare_(Uplifting Trance mix 20261130 mix).webp",
+  },
 ];
 
 export function getTrackBySlug(slug: string): Track | undefined {

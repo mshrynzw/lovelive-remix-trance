@@ -12,8 +12,8 @@ import { Lightbox, type GalleryImage } from "@/components/lightbox";
  */
 const jackets: GalleryImage[] = [
   {
-    src: "/images/Jacket_hp_next_Omoi yo Hitotsu ni Nare_(Uplifting Trance mix 2026MMDD mix).webp",
-    alt: "想いよひとつになれ の発表予定ジャケット",
+    src: "/images/Jacket_hp_TOKIMEKI Runners_(Uplifting Trance mix 20261231 mix).webp",
+    alt: "TOKIMEKI Runners の発表予定ジャケット",
   },
 ];
 
